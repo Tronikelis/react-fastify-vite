@@ -2,9 +2,10 @@ import React from "react";
 
 import Counter from "./Counter";
 
-export function Page() {
+export default function Page() {
     return (
         <div>
+            <a href="/about">about</a>
             <h1>Welcome</h1>
             This page is:
             <ul>

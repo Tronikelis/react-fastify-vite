@@ -1,7 +1,7 @@
 import type { Config } from "vite-plugin-ssr/types";
 
 export default {
-    passToClient: ["pageProps", "urlPathname"],
+    passToClient: ["pageProps"],
     clientRouting: true,
     hydrationCanBeAborted: true,
 } satisfies Config;

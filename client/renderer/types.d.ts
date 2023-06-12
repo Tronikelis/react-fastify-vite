@@ -1,24 +1,23 @@
 import type {
-    PageContextBuiltInClientWithClientRouting,
-    PageContextBuiltInClientWithServerRouting,
+    PageContextBuiltIn,
+    PageContextBuiltInClientWithClientRouting as PageContextBuiltInClient,
 } from "vite-plugin-ssr/types";
 
 type Page = (pageProps: PageProps) => React.ReactElement;
-type PageProps = Record<string, any>;
+type PageProps = Record<string, unknown>;
 
 export type PageContextCustom = {
     Page: Page;
     pageProps?: PageProps;
-    urlPathname: string;
-    exports: {
-        documentProps?: {
-            title?: string;
-            description?: string;
-        };
+    config: {
+        /** Title defined statically by /pages/some-page/+title.js (or by `export default { title }` in /pages/some-page/+config.js) */
+        title?: string;
     };
+    /** Title defined dynamically by onBeforeRender() */
+    title?: string;
 };
 
-type PageContextServer = PageContextBuiltInClientWithServerRouting<Page> & PageContextCustom;
-type PageContextClient = PageContextBuiltInClientWithClientRouting<Page> & PageContextCustom;
+type PageContextServer = PageContextBuiltIn<Page> & PageContextCustom;
+type PageContextClient = PageContextBuiltInClient<Page> & PageContextCustom;
 
 type PageContext = PageContextClient | PageContextServer;

@@ -13,9 +13,6 @@ const root = path.join(process.cwd(), "/client");
 async function startServer() {
     const app = fastify();
 
-    // will only be used in production
-    await app.register(middie);
-
     if (isProduction) {
         const distPath = path.join(root, "/dist/client/assets");
         await app.register(fastifyStatic, {
@@ -23,6 +20,7 @@ async function startServer() {
             prefix: "/assets/",
         });
     } else {
+        await app.register(middie);
         const viteServer = await vite.createServer({
             root,
             server: { middlewareMode: true },

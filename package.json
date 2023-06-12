@@ -3,9 +3,7 @@
     "description": "always launch cli commands from the root folder, where client/server folders are located!",
     "scripts": {
         "dev": "ts-node ./server",
-        "prod": "npm run build && npm run server:prod",
-        "build": "vite build",
-        "server:prod": "npm run build && npx -y cross-env NODE_ENV=production ts-node ./server",
+        "build:client": "cd client && vite build",
         "lint": "eslint ."
     },
     "workspaces": [

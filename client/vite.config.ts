@@ -3,7 +3,7 @@ import { UserConfig } from "vite";
 import ssr from "vite-plugin-ssr/plugin";
 
 const config: UserConfig = {
-    plugins: [react(), ssr()],
+    plugins: [react(), ssr({ prerender: true })],
 };
 
 export default config;

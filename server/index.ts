@@ -1,7 +1,8 @@
+import path from "node:path";
+
 import middie from "@fastify/middie";
 import fastifyStatic from "@fastify/static";
 import fastify from "fastify";
-import path from "path";
 import vite from "vite";
 import { renderPage } from "vite-plugin-ssr/server";
 
@@ -17,7 +18,7 @@ async function startServer() {
 
     if (isProduction) {
         const distPath = path.join(root, "/dist/client/assets");
-        app.register(fastifyStatic, {
+        await app.register(fastifyStatic, {
             root: distPath,
             prefix: "/assets/",
         });
@@ -47,9 +48,8 @@ async function startServer() {
 
     const port: number = process.env.PORT ? +process.env.PORT : 3000;
 
-    app.listen({ port }).then(() => {
-        console.log(`Server running at http://localhost:${port}`);
-    });
+    await app.listen({ port });
+    console.log(`Server running at http://localhost:${port}`);
 }
 
 startServer().catch(err => {

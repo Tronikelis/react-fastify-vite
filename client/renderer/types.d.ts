@@ -4,7 +4,7 @@ import type {
 } from "vite-plugin-ssr/types";
 
 type Page = (pageProps: PageProps) => React.ReactElement;
-type PageProps = {};
+type PageProps = Record<string, any>;
 
 export type PageContextCustom = {
     Page: Page;
@@ -18,9 +18,7 @@ export type PageContextCustom = {
     };
 };
 
-type PageContextServer = PageContextBuiltInClientWithServerRouting<Page> &
-    PageContextCustom;
-type PageContextClient = PageContextBuiltInClientWithClientRouting<Page> &
-    PageContextCustom;
+type PageContextServer = PageContextBuiltInClientWithServerRouting<Page> & PageContextCustom;
+type PageContextClient = PageContextBuiltInClientWithClientRouting<Page> & PageContextCustom;
 
 type PageContext = PageContextClient | PageContextServer;

@@ -1,2 +1,11 @@
 node_modules/
+.next/
+
+**/.env
+
 dist/
+.yarn*
+.swc/
+temp
+
+tsconfig.tsbuildinfo

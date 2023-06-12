@@ -1,12 +1,14 @@
-import ReactDOMServer from "react-dom/server";
 import React from "react";
-import { escapeInject, dangerouslySkipEscape } from "vite-plugin-ssr/server";
+import ReactDOMServer from "react-dom/server";
+import { dangerouslySkipEscape, escapeInject } from "vite-plugin-ssr/server";
+
 import type { PageContextServer } from "./types";
 
 export { render };
 // See https://vite-plugin-ssr.com/data-fetching
 export const passToClient = ["pageProps", "urlPathname"];
 
+// eslint-disable-next-line @typescript-eslint/require-await
 async function render(pageContext: PageContextServer) {
     const { Page, pageProps } = pageContext;
     const pageHtml = ReactDOMServer.renderToString(<Page {...pageProps} />);
@@ -15,8 +17,7 @@ async function render(pageContext: PageContextServer) {
     const { documentProps } = pageContext.exports;
     const title = (documentProps && documentProps.title) || "Vite SSR app";
     const desc =
-        (documentProps && documentProps.description) ||
-        "App using Vite + vite-plugin-ssr";
+        (documentProps && documentProps.description) || "App using Vite + vite-plugin-ssr";
 
     const documentHtml = escapeInject`<!DOCTYPE html>
     <html lang="en">

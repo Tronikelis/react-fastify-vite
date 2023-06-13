@@ -1,5 +1,6 @@
 {
-    "name": "reddit2",
+    "name": "change-meeeeeee",
+    "private": true,
     "description": "always launch cli commands from the root folder, where client/server folders are located!",
     "scripts": {
         "dev": "ts-node ./server",
